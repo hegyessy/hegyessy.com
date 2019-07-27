@@ -1,5 +1,8 @@
-return [
-  'panel' =>[
-    'install' => true
-  ]
-];
+<?php 
+  return [
+    'debug'  => true,
+    'panel' =>[
+      'install' => true
+    ]
+  ];
+?>
