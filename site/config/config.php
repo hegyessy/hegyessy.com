@@ -1,0 +1,5 @@
+return [
+  'panel' =>[
+    'install' => true
+  ]
+];
