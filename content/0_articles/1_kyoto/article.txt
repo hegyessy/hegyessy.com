@@ -1,0 +1,16 @@
+Title: Kyoto
+
+----
+
+Article: 
+
+Anything in our design process can be operationalized. The speed and accountability of front-end work are improved with “dev ops.” Research tasks like recruiting and usability lab management are more efficient with “research ops.” Just about any process or tool that saves time and money can be “oped,” getting design improvements to those that need it most: the people using our websites and products.
+
+(image: man-waiting-at-kyoto-transtation.jpg imgclass: breakout)
+
+ Design Operations, or Design Ops for short, ties it all of this together in one big package. But what does Design Ops mean for you, your work, and your team? It depends, but one way to start is by looking at the design work we know and love through a new lens. By distinguishing workflow from software, outcomes from team structures, and maybe even “agile” from UX, we can give some much-needed love to spaces we inhabit in our work, letting us spend more time being the kind of designers we want to be.
+ 
+ <div class="gallery-side-by-side">
+ (image: man-waiting-at-kyoto-transtation.jpg imgclass: full)
+ (image: man-waiting-at-kyoto-transtation.jpg imgclass: full)
+ </div>
