@@ -5,3 +5,4 @@
     <?= css('assets/css/index.css') ?>
 </head>
 <body>
+<?= snippet('nav') ?>
