@@ -23,7 +23,7 @@
 
 @font-face {
 	font-family: "regular";
-	src: url("/fonts/regular.woff2") format("woff2");
+	src: url("/regular.woff2") format("woff2");
 	font-weight: normal;
 }
 
