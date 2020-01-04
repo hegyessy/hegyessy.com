@@ -24,6 +24,7 @@
 @font-face {
 	font-family: "regular";
 	src: url("/fonts/regular.woff2") format("woff2");
+	font-weight: normal;
 }
 
 html {
@@ -44,7 +45,7 @@ html {
 body {
 	color: var(--g-dark-gray);
 	background-color: fcfdfc;
-	font-family: "Gill Sans", "Hoefler Text", "Garamond", "Minion", serif;
+	font-family: "regular", "Gill Sans", "Hoefler Text", "Garamond", "Minion", serif;
 	font-size: var(--g-text-body-size);
 	line-height: var(--g-line-height);
 	padding: 24px;
