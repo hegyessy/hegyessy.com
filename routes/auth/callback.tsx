@@ -26,8 +26,12 @@ export const handler = {
       expires_at: new Date().getTime() + Number(formData.get("expires_in")),
     });
 
+    const redirect_url = (window.location.host.includes("localhost"))
+      ? `http://${new URL(req.url).host}/admin/profile`
+      : `https://hegyessy.com/admin/profile`;
+
     const responseHeaders = new Headers({
-      location: `http://${new URL(req.url).host}/admin/profile`,
+      location: redirect_url,
     });
 
     const secureCookie = !Deno.env.get("SECURE_COOKIE_BOOL") ? true : false;
