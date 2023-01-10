@@ -1,7 +1,6 @@
 import { SiteLayout } from "components/SiteCore.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { ServerState } from "routes/_middleware.ts";
-import { UserProps } from "lib/data/types.ts";
+import { ServerState } from "lib/data/types.ts";
 
 interface Data {
   AUTH_URL: string | void;
@@ -9,10 +8,13 @@ interface Data {
 }
 
 export const handler: Handlers<Data> = {
-  GET(_req, ctx) {
-    const AUTH_URL = Deno.env.get("AUTH_URL");
+  GET(req, ctx) {
+    const url = new URL(req.url);
+    console.log(url);
+    const AUTH_URL = `${
+      Deno.env.get("SUPABASE_URL")
+    }/auth/v1/authorize?provider=github&redirect_to=${url}/auth/callback`;
     const state = ctx.state;
-    console.log(state.user);
     return ctx.render({ AUTH_URL, state });
   },
 };

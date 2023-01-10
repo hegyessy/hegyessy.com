@@ -6,7 +6,7 @@ export const handler = {
   async POST(req: Request) {
     const formData = await req.formData();
     const url = new URL(req.url);
-
+    console.log("url", url);
     if (
       !formData.has("access_token") ||
       !formData.has("refresh_token") ||
@@ -16,7 +16,7 @@ export const handler = {
     }
 
     const db = new Database<SessionRecord>("./file.json");
-
+    console.log(db);
     const session_id = crypto.randomUUID();
 
     await db.insertOne({
@@ -26,15 +26,15 @@ export const handler = {
       expires_at: new Date().getTime() + Number(formData.get("expires_in")),
     });
 
-    const redirect_url = (window.location.host.includes("localhost"))
-      ? `http://${new URL(req.url).host}/admin/profile`
+    const redirect_url = (url.origin.includes("localhost"))
+      ? `http://localhost:8000/admin/profile`
       : `https://hegyessy.com/admin/profile`;
 
     const responseHeaders = new Headers({
       location: redirect_url,
     });
 
-    const secureCookie = !Deno.env.get("SECURE_COOKIE_BOOL") ? true : false;
+    const secureCookie = (url.origin.includes("localhost")) ? false : true;
 
     // const responseHeaders = new Headers();
     const cookie: Cookie = {

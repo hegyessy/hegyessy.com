@@ -5,7 +5,6 @@ export const handler: Handlers = {
   GET(req) {
     const url = new URL(req.url);
     const headers = new Headers(req.headers);
-    console.log(url.hostname);
     deleteCookie(headers, "session", { path: "/", domain: url.hostname });
 
     headers.set("location", "/");

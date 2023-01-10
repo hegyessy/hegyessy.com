@@ -5,8 +5,9 @@ import { SupabaseClient } from "supabase";
 export const handler: Handlers = {
   async GET(req, ctx) {
     const state = ctx.state;
+    const url = new URL(req.url);
     const unauthenticated = new Headers({
-      location: `http://${new URL(req.url).host}/admin/`,
+      location: `${url.origin}/admin/`,
     });
 
     if (Object.keys(state).length === 0) {
@@ -26,6 +27,7 @@ export const handler: Handlers = {
   },
   async POST(req, ctx) {
     const formData = await req.formData();
+    const url = new URL(req.url);
     if (formData.has("title") && formData.has("url")) {
       const title = formData.get("title");
       const url = formData.get("url");
@@ -39,7 +41,7 @@ export const handler: Handlers = {
       console.log(error);
     }
     const responseHeaders = new Headers({
-      location: `http://${new URL(req.url).host}/admin/profile`,
+      location: `${url.origin}/admin/profile`,
     });
     const response = new Response("", {
       status: 303,
