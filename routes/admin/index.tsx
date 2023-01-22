@@ -8,12 +8,10 @@ interface Data {
 }
 
 export const handler: Handlers<Data> = {
-  GET(req, ctx) {
-    const url = new URL(req.url);
-    console.log(url);
+  GET(_req, ctx) {
     const AUTH_URL = `${
       Deno.env.get("SUPABASE_URL")
-    }/auth/v1/authorize?provider=github&redirect_to=${url}/auth/callback`;
+    }/auth/v1/authorize?provider=github&redirect_to=https://hegyessy.com/auth/callback`;
     const state = ctx.state;
     return ctx.render({ AUTH_URL, state });
   },

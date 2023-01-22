@@ -22,7 +22,7 @@ export const handler: Handlers = {
     ).select();
     const { data: bookmarks, error: bookmarks_error } = await supabaseClient
       .from("bookmarks").select("title, url");
-
+    console.log("profile error", profile_error, "bookmark", bookmarks_error);
     return ctx.render({ state, profile, bookmarks });
   },
   async POST(req, ctx) {
@@ -38,7 +38,7 @@ export const handler: Handlers = {
         title: title,
         url: url,
       });
-      console.log(error);
+      console.log("error", error);
     }
     const responseHeaders = new Headers({
       location: `${url.origin}/admin/profile`,

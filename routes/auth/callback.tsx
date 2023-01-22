@@ -6,7 +6,6 @@ export const handler = {
   async POST(req: Request) {
     const formData = await req.formData();
     const url = new URL(req.url);
-    console.log("url", url);
     if (
       !formData.has("access_token") ||
       !formData.has("refresh_token") ||
@@ -16,7 +15,6 @@ export const handler = {
     }
 
     const db = new Database<SessionRecord>("./file.json");
-    console.log(db);
     const session_id = crypto.randomUUID();
 
     await db.insertOne({
@@ -35,7 +33,8 @@ export const handler = {
     });
 
     const secureCookie = (url.origin.includes("localhost")) ? false : true;
-
+    console.log("secure cookie", secureCookie);
+    console.log("url.hostname", url.hostname);
     // const responseHeaders = new Headers();
     const cookie: Cookie = {
       name: "session",
