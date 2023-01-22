@@ -1,9 +1,8 @@
 import { MiddlewareHandlerContext } from "$fresh/server.ts";
 import { getCookies } from "std/http/cookie.ts";
-
-import { Database } from "https://deno.land/x/aloedb@0.9.0/mod.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
 import { createClient } from "supabase";
-import { ServerState, SessionRecord } from "lib/data/types.ts";
+import { ServerState } from "lib/data/types.ts";
 
 export async function handler(
   req: Request,
@@ -15,10 +14,20 @@ export async function handler(
     return ctx.next();
   }
 
-  const db = new Database<SessionRecord>("./file.json");
-  const { ...session } = await db.findOne({
-    session_id: cookies.session,
-  });
+  const db = new DB("sessions.db");
+
+  const q = db.query(
+    `SELECT session_id, refresh_token, access_token, expires_at FROM sessions WHERE session_id = ? LIMIT 1`,
+    [cookies.session],
+  );
+
+  const session = {
+    "session_id": q[0][0],
+    "refresh_token": q[0][1],
+    "access_token": q[0][2],
+    "expires_at": q[0][3],
+  };
+
   const { access_token } = session;
 
   function inMemoryStorageProvider() {

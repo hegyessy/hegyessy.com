@@ -11,7 +11,9 @@ export const handler: Handlers<Data> = {
   GET(_req, ctx) {
     const AUTH_URL = `${
       Deno.env.get("SUPABASE_URL")
-    }/auth/v1/authorize?provider=github&redirect_to=https://hegyessy.com/auth/callback`;
+    }/auth/v1/authorize?provider=github&redirect_to=${
+      Deno.env.get("BASE_URL")
+    }/auth/callback`;
     const state = ctx.state;
     return ctx.render({ AUTH_URL, state });
   },

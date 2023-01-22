@@ -1,6 +1,5 @@
-import { Database } from "https://deno.land/x/aloedb@0.9.0/mod.ts";
 import { Cookie, setCookie } from "std/http/cookie.ts";
-import { SessionRecord } from "lib/data/types.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
 
 export const handler = {
   async POST(req: Request) {
@@ -14,22 +13,30 @@ export const handler = {
       return new Error();
     }
 
-    const db = new Database<SessionRecord>("./file.json");
     const session_id = crypto.randomUUID();
+    const refresh_token = formData.get("refresh_token");
+    const access_token = formData.get("access_token");
+    const expires_at = new Date().getTime() +
+      Number(formData.get("expires_in"));
 
-    await db.insertOne({
-      session_id,
-      refresh_token: formData.get("refresh_token")! as string,
-      access_token: formData.get("access_token")! as string,
-      expires_at: new Date().getTime() + Number(formData.get("expires_in")),
-    });
+    const db = new DB("sessions.db");
 
-    const redirect_url = (url.origin.includes("localhost"))
-      ? `http://localhost:8000/admin/profile`
-      : `https://hegyessy.com/admin/profile`;
+    db.execute(`
+      CREATE TABLE IF NOT EXISTS sessions (
+        session_id TEXT,
+        refresh_token TEXT,
+        access_token TEXT,
+        expires_at integer
+      )
+    `);
+
+    db.query(
+      "INSERT INTO sessions (session_id, refresh_token, access_token, expires_at) VALUES(?,?,?,?)",
+      [session_id, refresh_token, access_token, expires_at],
+    );
 
     const responseHeaders = new Headers({
-      location: redirect_url,
+      location: Deno.env.get("BASE_URL")!,
     });
 
     const secureCookie = (url.origin.includes("localhost")) ? false : true;
