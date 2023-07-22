@@ -15,12 +15,10 @@ function Intro() {
     <header>
       <span class="text-[#f34213] font-bold text-2xl mb-8">
         Jason Hegyessy
-      </span>
+      </span> 
       <span class="font-normal ml-1 text-2xl text-[#2e2e3a]">
         is a software designer and developer with 13 years of experience
-        designing easy to use enterprise scale web and mobile apps. In the
-        future I hope to share my photograpy, travels, interest in analog and
-        retro media on this weblog.
+        designing easy to use enterprise scale web and mobile apps.
       </span>
     </header>
   );
