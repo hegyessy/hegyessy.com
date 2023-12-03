@@ -1,81 +1,51 @@
-import { Layout } from "../components/Layouts.tsx";
-import { JSX } from "preact";
+import { parse } from "$std/yaml/mod.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
 
-export default function Home() {
-  return (
-    <Layout>
-      <Intro />
-      <WorkHistory />
-    </Layout>
-  );
-}
-
-function Intro() {
-  return (
-    <header>
-      <span class="text-[#f34213] font-bold text-2xl mb-8">
-        Jason Hegyessy
-      </span> 
-      <span class="font-normal ml-1 text-2xl text-[#2e2e3a]">
-        is a software designer and developer with 13 years of experience
-        designing easy to use enterprise scale web and mobile apps.
-      </span>
-    </header>
-  );
-}
-
-interface WorkHistoryItemProps {
+interface CVProps {
   title: string;
   date: string;
-  children: string | JSX.Element;
+  description: string;
 }
 
-function WorkHistoryItem({ title, date, children }: WorkHistoryItemProps) {
-  return (
-    <li class="mb-4">
-      <time>{date}</time>
-      <br />
-      <strong class="text-[#0e3b3b]">{title}</strong>
-      <p>{children}</p>
-    </li>
-  );
-}
+export const handler: Handlers = {
+  async GET(_req, ctx) {
+    const cvfile = await Deno.readTextFile("data/work-history.yaml");
+    ctx.state.cv = parse(cvfile);
+    const resp = await ctx.render();
+    return resp;
+  },
+};
 
-function WorkHistory() {
+export default function Home(props: PageProps) {
+  const cv = props.state.cv as CVProps[];
   return (
-    <section id="work-history" class="my-8">
-      <header>
-        <h2 class="font-bold text-xl text-[#f34213] mb-2">Work History</h2>
+    <div class="col-start-3 col-end-4">
+      <header class="py-6">
+        <span class="text-[#f34213] font-bold text-2xl">
+          Jason Hegyessy
+        </span>
+        <span class="font-normal ml-1 text-2xl text-[#2e2e3a]">
+          is a software designer and developer with 13 years of experience
+          designing easy to use enterprise scale web and mobile apps.
+        </span>
       </header>
-      <ol>
-        <WorkHistoryItem
-          title="Application Designer, Apple Inc"
-          date="2017 to Today"
-        >
-          Design company wide security applications for the engineering team at
-          Information Security.
-        </WorkHistoryItem>
-        <WorkHistoryItem
-          title="Senior Product Designer, SmartRecruiters"
-          date="2012 to 2017"
-        >
-          Designed the reucruiting platform used by Ikea, McDonalds, Visa, City
-          of San Francisco, and many more.
-        </WorkHistoryItem>
-        <WorkHistoryItem
-          title="Application Designer, Apple Inc"
-          date="2012 to 2014"
-        >
-          Designed global asset managment solutions for use at Apple retail
-          stores.
-        </WorkHistoryItem>
-        <WorkHistoryItem
-          title="Web Designer &amp; Developer, Fulltime Freelance"
-          date="2010 to 2012"
-        >
-          Worked with media, artists, and production companies in San Francisco.
-        </WorkHistoryItem>
-      </ol>
-    </section>
+      <section id="work-history" class="">
+        <header>
+          <h2 class="font-bold text-xl text-[#f34213] mb-2">Work History</h2>
+        </header>
+        <ol>
+          {cv.map((work) => {
+            return (
+              <li class="mb-4">
+                <time>{work.date}</time>
+                <br />
+                <strong class="text-[#0e3b3b]">{work.title}</strong>
+                <p>{work.description}</p>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    </div>
   );
 }

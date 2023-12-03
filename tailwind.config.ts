@@ -1,16 +1,14 @@
-/** @type {import('tailwindcss').Config} */
+import { type Config } from "tailwindcss";
+
 export default {
   content: [
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./islands/**/*.{js,ts,jsx,tsx,mdx}",
-    "./routes/**/*.{js,ts,jsx,tsx,mdx}",
+    "{routes,islands,components}/**/*.{ts,tsx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        serif: ["Sentinel A", "Sentinel B"],
+      gridTemplateColumns: {
+        "site": "24px 1fr minmax(320px, 64ch) 1fr 14px",
       },
     },
   },
-  plugins: [],
-};
+} as Config;
