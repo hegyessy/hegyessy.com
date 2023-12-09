@@ -9,6 +9,11 @@ export default {
       gridTemplateColumns: {
         "site": "24px 1fr minmax(320px, 64ch) 1fr 14px",
       },
+      colors: {
+        primary: "var(--primary)",
+        "neutral-bg": "var(--neutral-bg)",
+        "neutral-fg": "var(--neutral-fg)"
+      }
     },
   },
 } as Config;

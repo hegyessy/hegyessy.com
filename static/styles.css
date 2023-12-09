@@ -5,6 +5,19 @@
 @layer base {
 	body {
 		font-family: "Sentinel A", "Sentinel B";
-		@apply bg-[#e7decd];
+	}
+
+	:root {
+		--primary: #f34213;
+		--neutral-bg: #e7decd;
+		--neutral-fg: #2e2e3a;
+	}
+	
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--primary: #ff653c;
+			--neutral-bg: #202023;
+			--neutral-fg: #f0ebe1;
+		}
 	}
 }

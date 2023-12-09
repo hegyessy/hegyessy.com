@@ -13,7 +13,7 @@ export default function App({ Component }: AppProps) {
           href={Deno.env.get("FONTS_URL")}
         />
       </head>
-      <body>
+      <body class="bg-neutral-bg text-neutral-fg">
         <main class="grid grid-cols-site">
           <Component />
         </main>
