@@ -42,7 +42,8 @@ export default function RSVP() {
                 443 Clement St. San Francisco, Ca
               </li>
               <li>
-                Saturday, February 22nd, 5-9 p.m.
+                Saturday, February 22nd<br />
+                5-9 p.m.
               </li>
             </ul>
           </address>
