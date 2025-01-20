@@ -56,7 +56,8 @@ export default function RSVP() {
         <h3 class="font-bold text-base">RSVP</h3>
         <p class="text-base">
           RSVPs aren’t required but would be greatly appreciated to help provide
-          the caterer with an estimated headcount.
+          the caterer with an estimated headcount. Email, text, or DM me on
+          social media to confirm attendance.
         </p>
       </section>
       <hr class="bg-primary h-1 my-8" />
