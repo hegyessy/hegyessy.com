@@ -1,6 +1,11 @@
+import { Head } from "$fresh/runtime.ts";
+
 export default function RSVP() {
   return (
     <article class="col-start-3 col-end-4 text-2xl pb-12">
+      <Head>
+        <title>I miss you. Come drink wine with me.</title>
+      </Head>
       <header class="pt-12">
         <h1 class="text-primary font-bold mb-2">
           Dear friends, I miss you.
