@@ -43,7 +43,7 @@ export default function RSVP() {
               </li>
               <li>
                 Saturday, February 22nd<br />
-                5-9 p.m.
+                Anytime between 5-9 p.m.
               </li>
             </ul>
           </address>
