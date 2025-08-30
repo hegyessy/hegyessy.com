@@ -25,7 +25,7 @@ export default function Home(props: PageProps) {
           Jason Hegyessy
         </span>
         <span class="font-normal ml-1 text-2xl">
-          is a software designer and developer with 13 years of experience
+          is a software designer and developer with 15 years of experience
           designing easy to use enterprise scale web and mobile apps.
         </span>
       </header>
